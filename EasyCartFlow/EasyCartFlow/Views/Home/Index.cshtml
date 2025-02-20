@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EasyCartFlow.Models.Product>
+@{
+    ViewBag.Title = "Products Page";
+}
+
+<main>
+    <section aria-labelledby="gettingStartedTitle">
+        <h2>Products</h2>
+        <div class="container">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="Product Image">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="card-text">@product.Description</p>
+                                <p class="mt-auto">@product.Price.ToString("C")</p>
+                                @using (Html.BeginForm("AddToCart", "ShoppingCart", new { productId = product.ProductId }, FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>

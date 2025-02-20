@@ -1,0 +1,32 @@
+@model EasyCartFlow.Models.Order
+@{
+    ViewBag.Title = "Order Confirmation";
+}
+
+<h2>Order Confirmation</h2>
+<p>Thank you for your order! Your order number is <strong>@Model.OrderId</strong>.</p>
+<h3>Order Details</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDetails)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@(item.Price * item.Quantity).ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    Total Amount: @Model.TotalAmount.ToString("C")
+</p>
